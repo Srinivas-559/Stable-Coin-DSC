@@ -1,66 +1,57 @@
-## Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+# STABLE COIN - DSC
 
-Foundry consists of:
+stablecoins are a vital component of the cryptocurrency ecosystem, offering stability, liquidity, and utility. They bridge the gap between traditional finance and blockchain technology, enabling a wide range of use cases, from everyday transactions to decentralized finance. As the adoption of cryptocurrencies continues to grow, the importance of stablecoins is expected to increase further.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-## Documentation
 
-https://book.getfoundry.sh/
 
-## Usage
 
-### Build
 
-```shell
-$ forge build
+## Deployment
+
+Spin up the Anvil chain
+
+```
+  make deploy
 ```
 
-### Test
+Deploy on Anvil
 
-```shell
-$ forge test
+```
+make deploy
+```
+Test
+
+```
+forge test 
+```
+Coverage 
+
+```
+forge coverage
 ```
 
-### Format
 
-```shell
-$ forge fmt
+## Scripts
+
+1.Get Weth:
+
+```
+cast send 0xdd13E55209Fd76AfE204dBda4007C227904f0a81 "deposit()" --value 0.1ether --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY
 ```
 
-### Gas Snapshots
+2.Approve Weth:
 
-```shell
-$ forge snapshot
+```
+cast send 0xdd13E55209Fd76AfE204dBda4007C227904f0a81 "approve(address,uint256)" 0x091EA0838eBD5b7ddA2F2A641B068d6D59639b98 1000000000000000000 --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY
 ```
 
-### Anvil
-
-```shell
-$ anvil
+3.Deposit and MintDsc :
+```
+cast send 0x091EA0838eBD5b7ddA2F2A641B068d6D59639b98 "depositCollateralAndMintDsc(address,uint256,uint256)" 0xdd13E55209Fd76AfE204dBda4007C227904f0a81 100000000000000000 10000000000000000 --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY
 ```
 
-### Deploy
+## Thank U 
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
